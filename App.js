@@ -1,37 +1,50 @@
-// In App.js in a new project
+import { StyleSheet, Text, View } from "react-native";
+import * as SplashScreen from "expo-splash-screen";
+import { useCallback, useEffect, useState } from "react";
+import * as Font from "expo-font";
+import {
+    useFonts,
+    Inter_400Regular,
+    Inter_600SemiBold,
+} from "@expo-google-fonts/inter";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Navigation from "./component/Navigation";
 
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+export default function App() {
+    const StackNav = createNativeStackNavigator();
 
-function HomeScreen() {
+    /*Laisse en place le splash creen pendant qu'on récupère les ressources nécessaires */
+    SplashScreen.preventAutoHideAsync();
+
+    const [isReady, setIsReady] = useState(false);
+
+    useEffect(() => {
+        async function prepare() {
+            try {
+                //Chargement des fonts
+                await Font.loadAsync({ Inter_400Regular, Inter_600SemiBold });
+            } catch (e) {
+                console.warn(e);
+            } finally {
+                setIsReady(true);
+            }
+        }
+        prepare();
+    }, []);
+
+    const onLayoutRootView = useCallback(async () => {
+        if (isReady) {
+            await SplashScreen.hideAsync();
+        }
+    }, [isReady]);
+
+    if (!isReady) {
+        return null;
+    }
+
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Home Screen</Text>
+        <View onLayout={onLayoutRootView} style={{ flex: 1 }}>
+            <Navigation />
         </View>
     );
 }
-
-function DetailsScreen() {
-    return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Details Screen</Text>
-        </View>
-    );
-}
-
-const Stack = createNativeStackNavigator();
-
-function App() {
-    return (
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName="Home">
-                <Stack.Screen name="Home" component={HomeScreen} />
-                <Stack.Screen name="Details" component={DetailsScreen} />
-            </Stack.Navigator>
-        </NavigationContainer>
-    );
-}
-
-export default App;
