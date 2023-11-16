@@ -15,7 +15,7 @@ export default function Navigation() {
   function Log() {
     return (
       <Stack.Navigator initialRouteName={Login}>
-        <Stack.Screen name="Connection" component={Login} />
+        <Stack.Screen name="Connexion" component={Login} />
         <Stack.Screen name="PasswordForget" component={PasswordForget} />
       </Stack.Navigator>
     );
@@ -40,7 +40,7 @@ export default function Navigation() {
         />
 
         <Drawer.Screen
-          name="Register"
+          name="Inscription"
           component={Register}
           options={() => ({
             header: (props) => <Navbar {...props} title="Inscription" />,
