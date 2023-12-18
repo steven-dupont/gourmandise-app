@@ -50,6 +50,10 @@ export default function Home({ navigation }) {
     },
   ];
 
+  const handleProductPress = () => {
+    navigation.navigate("Liste produits"); // Remplacez "Products" par le nom de votre écran "Produits"
+  };
+
   return (
     <View style={styles.container2}>
       <ScrollView>
@@ -102,7 +106,7 @@ export default function Home({ navigation }) {
         <View>
           <Text style={styles.texteProduitPhare}>Nos produits phare</Text>
         </View>
-
+        <View style={styles.textEspace}></View>
         <Swiper
           style={styles.wrapper}
           showsButtons={false}
@@ -112,14 +116,18 @@ export default function Home({ navigation }) {
         >
           {/* Troisième slide */}
           <View style={styles.dataSlide}>
-            <Image source={{ uri: DATA[2].photo }} style={styles.webImage} />
+            <TouchableOpacity onPress={handleProductPress}>
+              <Image source={{ uri: DATA[2].photo }} style={styles.webImage} />
+            </TouchableOpacity>
             <View style={{ flex: 1, justifyContent: "flex-end" }}>
               <Text style={styles.dataName}>{DATA[2].name}</Text>
             </View>
           </View>
           {/* Quatrième slide */}
           <View style={styles.dataSlide}>
-            <Image source={{ uri: DATA[3].photo }} style={styles.webImage} />
+            <TouchableOpacity style={styles.btn_search} onPress={handleSearch}>
+              <Image source={{ uri: DATA[3].photo }} style={styles.webImage} />
+            </TouchableOpacity>
             <View style={{ flex: 1, justifyContent: "flex-end" }}>
               <Text style={styles.dataName}>{DATA[3].name}</Text>
             </View>

@@ -6,6 +6,12 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
     height: 100,
   },
+  containerInscription: {
+    flex: 1,
+    justifyContent: "center",
+    paddingHorizontal: 16,
+    height: 100,
+  },
   container2: {
     flex: 1,
     justifyContent: "center",
@@ -153,5 +159,32 @@ export const styles = StyleSheet.create({
     resizeMode: "contain", // ou 'contain' selon vos préférences
     justifyContent: "center", // Centre les éléments verticalement
     alignItems: "center", // Centre les éléments horizontalement
+  },
+  containerProduits: {
+    flex: 1,
+    margin: 10,
+  },
+  item: {
+    flex: 1,
+    margin: 10,
+    padding: 10,
+    backgroundColor: "#f0f0f0",
+  },
+  imageProduits: {
+    width: "100%",
+    height: 150,
+    resizeMode: "cover",
+  },
+  titleProduits: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 5,
+  },
+  dataName: {},
+  columnWrapper: {},
+  tri: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: 10,
   },
 });

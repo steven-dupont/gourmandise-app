@@ -30,11 +30,14 @@ export default function Login({ navigation }) {
       });
       if (response.ok) {
         const data = await response.json();
-        //Stocker le token de SecureStorage
+        // Stocker le token de SecureStorage
         await saveToken("token", data.token);
 
-        // Redirection vers la page qu'on souhaite
-        // navigation.navigate("Espace Client");
+        // Redirection vers la page souhaitée
+        navigation.navigate("Espace Client");
+      } else {
+        // Gérer les erreurs, afficher un message à l'utilisateur, etc.
+        console.error("Erreur lors de la connexion");
       }
     } catch (error) {
       console.error("Erreur :", error);
