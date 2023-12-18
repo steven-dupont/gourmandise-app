@@ -8,53 +8,68 @@ import Home from "../screens/Home";
 import PasswordForget from "../screens/PasswordForget";
 import Products from "../screens/Products";
 import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { AntDesign, Entypo } from "@expo/vector-icons";
+import FormProducts from "../screens/FormProducts";
 
-const Drawer = createDrawerNavigator();
+const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+const FicheProduitStack = createStackNavigator();
+const Drawer = createDrawerNavigator();
+
+function Log() {
+  return (
+    <Stack.Navigator initialRouteName={Login}>
+      <Stack.Screen name="Connexion" component={Login} />
+      <Stack.Screen name="PasswordForget" component={PasswordForget} />
+    </Stack.Navigator>
+  );
+}
+
+function FicheProduitNavigator() {
+  return (
+    <FicheProduitStack.Navigator>
+      <FicheProduitStack.Screen name="Liste" component={Products} />
+      <FicheProduitStack.Screen name="Fiche produit" component={FormProducts} />
+    </FicheProduitStack.Navigator>
+  );
+}
+
 export default function Navigation() {
-  function Log() {
-    return (
-      <Stack.Navigator initialRouteName={Login}>
-        <Stack.Screen name="Connexion" component={Login} />
-        <Stack.Screen name="PasswordForget" component={PasswordForget} />
-      </Stack.Navigator>
-    );
-  }
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen
-          name="Home"
-          component={Home}
-          options={() => ({
-            header: (props) => <Navbar {...props} title="Accueil" />,
-          })}
-        />
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ color, size }) => {
+            let iconName;
 
-        <Drawer.Screen
-          name="Se connecter"
-          component={Log}
-          options={() => ({
-            header: (props) => <Navbar {...props} title="Se connecter" />,
-          })}
-        />
+            if (route.name === "Accueil") {
+              iconName = "home";
+            } else if (route.name === "Se connecter") {
+              iconName = "login";
+            } else if (route.name === "Inscription") {
+              iconName = "add-user";
+            } else if (route.name === "Nos produits") {
+              iconName = "box";
+            }
 
-        <Drawer.Screen
-          name="Inscription"
-          component={Register}
-          options={() => ({
-            header: (props) => <Navbar {...props} title="Inscription" />,
-          })}
-        />
-
-        <Drawer.Screen
-          name="Nos produits"
-          component={Products}
-          options={() => ({
-            header: (props) => <Navbar {...props} title="Nos produits" />,
-          })}
-        />
-      </Drawer.Navigator>
+            return <Entypo name={iconName} size={size} color={color} />;
+          },
+        })}
+        tabBarOptions={{
+          activeTintColor: "black",
+          inactiveTintColor: "sienna",
+          style: {
+            display: "flex",
+          },
+        }}
+      >
+        {/* Barre de navigation du bas de l'écran */}
+        <Tab.Screen name="Accueil" component={Home} />
+        <Tab.Screen name="Se connecter" component={Log} />
+        <Tab.Screen name="Inscription" component={Register} />
+        <Tab.Screen name="Nos produits" component={FicheProduitNavigator} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
