@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { styles } from "../styles/AppStyles";
 import Swiper from "react-native-swiper";
+import { SwiperFlatList } from "react-native-swiper-flatlist";
 
 export default function Home({ navigation }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -51,7 +52,7 @@ export default function Home({ navigation }) {
   ];
 
   const handleProductPress = () => {
-    navigation.navigate("Liste produits"); // Remplacez "Products" par le nom de votre écran "Produits"
+    navigation.navigate("Nos produits"); //
   };
 
   return (
@@ -77,12 +78,13 @@ export default function Home({ navigation }) {
           </View>
         </View>
 
-        {/* Swiper avec images */}
+        {/* Swiper avec les images */}
         <Swiper
           style={styles.wrapper}
           showsButtons={false}
           loop={false}
           showsPagination={false}
+          horizontal={true}
         >
           {/* Première slide */}
           <View style={styles.slide}>

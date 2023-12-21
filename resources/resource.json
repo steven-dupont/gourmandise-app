@@ -1,0 +1,20 @@
+{
+  "avisClient": [
+    {
+      "nom": "Micheline",
+      "avis": "Excellent produits, livraison rapide."
+    },
+    {
+      "nom": "Rodrigue",
+      "avis": "Prix abordable, livraison en 3 jours."
+    },
+    {
+      "nom": "Jean-Sébastien",
+      "avis": "Produit satisfaisant."
+    },
+    {
+      "nom": "Michel Bouchet",
+      "avis": "CUILLERE."
+    }
+  ]
+}

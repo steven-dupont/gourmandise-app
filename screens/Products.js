@@ -1,52 +1,48 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, ButtonGroup } from "react-native-elements";
-import {
-  FlatList,
-  Pressable,
-  Text,
-  View,
-  Image,
-  StyleSheet,
-} from "react-native";
-import { styles } from "../styles/AppStyles";
+import { FlatList, Pressable, Text, View, Image } from "react-native";
+import { styles, stylesList } from "../styles/AppStyles";
 
 export default function Products({ navigation }) {
   const [sortBy, setSortBy] = useState("name"); // État du tri
   const [filterBy, setFilterBy] = useState(""); // État du filtre
-  const DATA = [
-    {
-      id: 1,
-      name: "Barre de chocolat au lait",
-      description: "Une délicieuse barre de chocolat au lait crémeux.",
-      photo:
-        "https://cdn.pixabay.com/photo/2013/09/18/18/24/chocolate-183543_1280.jpg",
-    },
-    {
-      id: 2,
-      name: "Truffes au chocolat noir",
-      description: "Des truffes fondantes au chocolat noir de haute qualité.",
-      photo:
-        "https://cdn.pixabay.com/photo/2022/01/15/19/29/chocolate-6940529_1280.jpg",
-    },
-    {
-      id: 3,
-      name: "Chocolat chaud suisse",
-      description: "Le chocolat chaud suisse authentique, épais et délicieux.",
-      photo:
-        "https://cdn.pixabay.com/photo/2016/11/29/13/54/breakfast-1870009_1280.jpg",
-    },
-    {
-      id: 4,
-      name: "Crêpes au Nutella",
-      description: "De délicieuses crêpes garnies de Nutella au chocolat.",
-      photo:
-        "https://cdn.pixabay.com/photo/2021/12/08/19/41/dessert-6856584_1280.jpg",
-    },
-  ];
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch(
+      "http://94.247.183.122/plesk-site-preview/gourmandise-api.sdupont.v70208.campus-centre.fr/https/94.247.183.122/api/products",
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Erreur HTTP! Statut : ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setData(data);
+      })
+      .catch((error) => {
+        console.error(
+          "Erreur lors de la récupération des données :",
+          error.message,
+        );
+      });
+  }, []);
 
   const handleProductPress = (item) => {
-    navigation.navigate("Fiche produit", { item: item });
+    navigation.navigate("Fiche produit", {
+      productDetails: {
+        designation: item.designation,
+        descriptif: item.descriptif,
+        poids_piece: item.poids_piece,
+        quantite: item.quantite,
+        photo:
+          item.image ||
+          "https://cdn.pixabay.com/photo/2022/01/15/19/29/chocolate-6940529_1280.jpg", // Image de test
+      },
+    });
   };
+
   const handleSortBy = (value) => {
     setSortBy(value);
   };
@@ -62,18 +58,25 @@ export default function Products({ navigation }) {
     buttonStyle: { backgroundColor: "sienna" }, // Couleur de fond
     textStyle: { color: "white" }, // Couleur du texte
   };
+
   const renderProducts = ({ item }) => (
     <Pressable onPress={() => handleProductPress(item)}>
-      <View style={styles.item}>
-        <Text style={styles.title}>{item.name}</Text>
-        <Image style={styles.imageProduits} source={{ uri: item.photo }} />
+      <View style={stylesList.item}>
+        <Text style={stylesList.title}>{item.designation}</Text>
+        <Image
+          style={stylesList.imageProduits}
+          source={{
+            uri:
+              item.image ||
+              "https://cdn.pixabay.com/photo/2022/01/15/19/29/chocolate-6940529_1280.jpg", // Image de test
+          }}
+        />
       </View>
     </Pressable>
   );
 
   return (
     <View style={styles.containerProduits}>
-      {/* Utiliser ButtonGroup pour des boutons stylés */}
       <ButtonGroup
         onPress={(selectedIndex) => {
           if (selectedIndex === 0) handleSortBy("name");
@@ -83,9 +86,9 @@ export default function Products({ navigation }) {
         {...buttonStyles}
       />
       <FlatList
-        data={DATA}
+        data={data}
         renderItem={renderProducts}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item, index) => index.toString()}
         numColumns={2}
       />
     </View>

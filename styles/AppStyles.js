@@ -124,14 +124,15 @@ export const styles = StyleSheet.create({
   wrapper2: {},
   slide: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "right",
     alignItems: "center",
     height: 200,
   },
   photo1: {
-    width: 300,
+    // width: 300,
     height: 150,
     marginTop: 100,
+    maxWidth: 300,
   },
   photo2: {
     width: 300,
@@ -186,5 +187,83 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     padding: 10,
+  },
+});
+
+export const stylesList = StyleSheet.create({
+  container: {
+    maxHeight: 192,
+  },
+  item: {
+    flex: 1,
+    margin: 5,
+    padding: 10,
+    backgroundColor: "#f0f0f0",
+    elevation: 5, // Pour Android
+    shadowColor: "sienna", // Pour iOS
+    shadowOffset: { width: 5, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    borderRadius: 8, // Bordure arrondie
+    height: 200, // Définissez la taille souhaitée ici
+    width: 170,
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "sienna", // Couleur personnalisée
+    marginBottom: 8, // Ajout d'une marge inférieure
+    textAlign: "center",
+  },
+
+  imageProduits: {
+    width: "100%",
+    height: 150, // Définissez la taille souhaitée ici
+    resizeMode: "cover",
+    borderRadius: 8, // Bordure arrondie
+  },
+});
+
+export const stylesFiche = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 8,
+  },
+  text: {
+    fontSize: 16,
+    marginBottom: 4,
+  },
+  imageProduits: {
+    width: "100%",
+    height: 200,
+    resizeMode: "cover",
+    borderRadius: 8,
+    marginTop: 16,
+  },
+  ajouterProduit: {
+    marginTop: 20,
+    backgroundColor: "sienna",
+    color: "yellow",
+  },
+  avisClient: {
+    flex: 1,
+    margin: 5,
+    padding: 10,
+    backgroundColor: "#f0f0f0",
+    elevation: 5, // Pour Android
+    shadowColor: "sienna", // Pour iOS
+    shadowOffset: { width: 5, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    borderRadius: 8, // Bordure arrondie
+    height: 200, // Définissez la taille souhaitée ici
+    width: 170,
   },
 });
