@@ -18,6 +18,39 @@ export default function Register() {
   const [ville, setVille] = useState("");
   const [telephone, setTelephone] = useState("");
 
+  const handleInscription = async () => {
+    try {
+      const response = await fetch(
+        "https://gourmandise-api.sdupont.v70208.campus-centre.fr/api/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: mail,
+            nom: nomPrenom,
+            ville: ville,
+            codePostal: codePostal,
+            telephone: telephone,
+            motdepasse: motdepasse,
+          }),
+        },
+      );
+
+      if (response.status === 201) {
+        console.log("Utilisateur enregistré avec succès.");
+        // Vous pouvez effectuer des actions supplémentaires ici (navigation, message de succès, etc.).
+      } else {
+        console.log("Erreur lors de de l'enregistrement de l'utilisateur:");
+        // Vous pouvez gérer les erreurs ici.
+      }
+    } catch (error) {
+      console.error("Erreur lors de la requête d'inscription:", error);
+      // Vous pouvez gérer les erreurs réseau ici.
+    }
+  };
+
   return (
     <KeyboardAvoidingView behavior="height" style={styles.containerInscription}>
       <View tyle={{ flex: 1 }}>
@@ -79,7 +112,7 @@ export default function Register() {
             secureTextEntry={true}
           />
 
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={handleInscription}>
             <Text style={styles.buttonText}>S'inscrire</Text>
           </TouchableOpacity>
         </ScrollView>

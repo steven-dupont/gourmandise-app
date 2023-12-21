@@ -23,24 +23,34 @@ export default function Login({ navigation }) {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mail, motdepasse }),
-      });
+      console.log("Avant la requête");
+      const response = await fetch(
+        "https://gourmandise-api.sdupont.v70208.campus-centre.fr/api/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: mail,
+            motdepasse: motdepasse,
+          }),
+        },
+      );
+      console.log("Après la requête");
       if (response.ok) {
         const data = await response.json();
-        // Stocker le token de SecureStorage
-        await saveToken("token", data.token);
 
-        // Redirection vers la page souhaitée
-        navigation.navigate("Espace Client");
+        // Enregistrement du token dans SecureStore
+        await SecureStore.setItemAsync("jwtToken", data.token);
+        // // Redirection
+        // navigation.navigate("Accueil");
       } else {
-        // Gérer les erreurs, afficher un message à l'utilisateur, etc.
-        console.error("Erreur lors de la connexion");
+        // Gérer les cas d'erreur
+        console.error("Erreur lors de la connexion:", response.status);
       }
     } catch (error) {
-      console.error("Erreur :", error);
+      console.error("Erreur lors de la requête de connexion:", error);
     }
   };
 
