@@ -29,6 +29,23 @@ export default function Products({ navigation }) {
       });
   }, []);
 
+    const fetchProductDetails = async (productId) => {
+        try {
+            const response = await fetch(
+                `http://94.247.183.122/plesk-site-preview/gourmandise-api.sdupont.v70208.campus-centre.fr/https/94.247.183.122/api/productDetails?id=${productId}`
+            );
+
+            if (!response.ok) {
+                throw new Error(`Erreur HTTP! Statut : ${response.status}`);
+            }
+
+            const productDetails = await response.json();
+            return productDetails;
+        } catch (error) {
+            console.error("Erreur lors de la récupération des détails du produit :", error.message);
+        }
+    };
+
   const handleProductPress = (item) => {
     navigation.navigate("Fiche produit", {
       productDetails: {
@@ -38,7 +55,7 @@ export default function Products({ navigation }) {
         quantite: item.quantite,
         photo:
           item.image ||
-          "https://cdn.pixabay.com/photo/2022/01/15/19/29/chocolate-6940529_1280.jpg", // Image de test
+          "https://picsum.photos/200/300", // Image de test
       },
     });
   };
@@ -68,7 +85,9 @@ export default function Products({ navigation }) {
           source={{
             uri:
               item.image ||
-              "https://cdn.pixabay.com/photo/2022/01/15/19/29/chocolate-6940529_1280.jpg", // Image de test
+                "https://picsum.photos/200/300",
+              // require('../assets/promo.png'),
+
           }}
         />
       </View>

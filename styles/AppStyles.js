@@ -227,9 +227,36 @@ export const stylesList = StyleSheet.create({
 export const stylesFiche = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    justifyContent: "center",
-    alignItems: "center",
+    margin: 5,
+    padding: 10,
+    backgroundColor: "#f0f0f0",
+    alignItems: "stretch",
+  },
+  cardHaut: {
+    flex: 1,
+    margin: 5,
+    padding: 10,
+    backgroundColor: "#f0f0f0",
+    elevation: 5, // Pour Android
+    shadowColor: "sienna", // Pour iOS
+    shadowOffset: { width: 5, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    borderRadius: 8, // Bordure arrondie
+    alignItems: "stretch",
+  },
+  cardBas: {
+    flex: 1,
+    margin: 5,
+    padding: 10,
+    backgroundColor: "#f0f0f0",
+    elevation: 5, // Pour Android
+    shadowColor: "sienna", // Pour iOS
+    shadowOffset: { width: 5, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    borderRadius: 8, // Bordure arrondie
+    alignItems: "stretch",
   },
   title: {
     fontSize: 24,
@@ -239,6 +266,13 @@ export const stylesFiche = StyleSheet.create({
   text: {
     fontSize: 16,
     marginBottom: 4,
+  },
+
+  textetitre: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 4,
+    color: "red",
   },
   imageProduits: {
     width: "100%",
@@ -265,5 +299,23 @@ export const stylesFiche = StyleSheet.create({
     borderRadius: 8, // Bordure arrondie
     height: 200, // Définissez la taille souhaitée ici
     width: 170,
+  },
+
+  //CARD UI KITTEN
+
+  topContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  card: {
+    flex: 1,
+    margin: 2,
+  },
+  footerContainer: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+  },
+  footerControl: {
+    marginHorizontal: 2,
   },
 });
