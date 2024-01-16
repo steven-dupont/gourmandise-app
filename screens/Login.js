@@ -14,7 +14,7 @@ import { styles } from "../styles/AppStyles";
 import Swiper from "react-native-swiper";
 
 export default function Login({ navigation }) {
-  const [mail, setMail] = useState("");
+  const [email, setMail] = useState("");
   const [motdepasse, setMotdepasse] = useState("");
 
   async function saveToken(key, value) {
@@ -23,21 +23,23 @@ export default function Login({ navigation }) {
 
   const handleLogin = async () => {
     try {
-      console.log("Avant la requête");
+
+        console.log("Avant la requête",
+            email,
+            motdepasse,
+        );
       const response = await fetch(
-        "https://gourmandise-api.sdupont.v70208.campus-centre.fr/api/login",
+        "94.247.183.122/plesk-site-preview/gourmandise-api.sdupont.v70208.campus-centre.fr/https/94.247.183.122/api/register",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: mail,
-            motdepasse: motdepasse,
-          }),
+          headers: {"Content-Type": "application/json",},
+          body: JSON.stringify({email: email, motdepasse: motdepasse,}),
         },
       );
-      console.log("Après la requête");
+      console.log("Après la requête",
+            email,
+            motdepasse,
+        );
       if (response.ok) {
         const data = await response.json();
 
