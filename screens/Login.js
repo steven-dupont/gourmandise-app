@@ -28,6 +28,7 @@ export default function Login({ navigation }) {
             email,
             motdepasse,
         );
+        console.log(JSON.stringify({email: email, motdepasse: motdepasse,}),)
       const response = await fetch(
         "94.247.183.122/plesk-site-preview/gourmandise-api.sdupont.v70208.campus-centre.fr/https/94.247.183.122/api/register",
         {
@@ -35,6 +36,7 @@ export default function Login({ navigation }) {
           headers: {"Content-Type": "application/json",},
           body: JSON.stringify({email: email, motdepasse: motdepasse,}),
         },
+
       );
       console.log("Après la requête",
             email,
