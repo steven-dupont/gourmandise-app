@@ -21,7 +21,7 @@ export default function Register() {
   const handleInscription = async () => {
     try {
       const response = await fetch(
-        "https://gourmandise-api.sdupont.v70208.campus-centre.fr/api/register",
+        "http://94.247.183.122/plesk-site-preview/gourmandise-api.sdupont.v70208.campus-centre.fr/https/94.247.183.122/api/register",
         {
           method: "POST",
           headers: {
