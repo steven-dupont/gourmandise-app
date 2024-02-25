@@ -53,7 +53,7 @@ export default function Register() {
 
   return (
     <KeyboardAvoidingView behavior="height" style={styles.containerInscription}>
-      <View tyle={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
         <ScrollView keyboardShouldPersistTaps="handled">
           <Text style={styles.sousTitre}>
             Voici l'espace d'inscription de Gourmandise.

@@ -3,12 +3,14 @@ import { Button, ButtonGroup } from "react-native-elements";
 import { FlatList, Pressable, Text, View, Image, RefreshControl } from "react-native";
 import { styles, stylesList } from "../styles/AppStyles";
 
-export default function Products({ navigation }) {
+export default function CommandeList({ navigation }) {
     const [sortBy, setSortBy] = useState("name");
     const [filterBy, setFilterBy] = useState("");
     const [data, setData] = useState([]);
     const [sortPressed, setSortPressed] = useState(false);
     const [refreshing, setRefreshing] = useState(false);
+    const [defaultSort, setDefaultSort] = useState("name");
+    
 
     useEffect(() => {
         fetchData();
@@ -24,6 +26,21 @@ export default function Products({ navigation }) {
             setSortPressed(false);
         }
     }, [sortPressed, sortBy, data]);
+
+    useEffect(() => {
+        if (defaultSort === "name") {
+            fetchData();
+        } else if (defaultSort === "periode") {
+
+            const sortedDataByPeriode = [...data].sort((a, b) => {
+
+
+                return a.periode.localeCompare(b.periode);
+            });
+
+            setData(sortedDataByPeriode);
+        }
+    }, [defaultSort]);
 
     const fetchData = () => {
         setRefreshing(true);
@@ -75,6 +92,8 @@ export default function Products({ navigation }) {
                 descriptif: item.descriptif,
                 poids_piece: item.poids_piece,
                 quantite: item.quantite,
+                commande: item.nbr_commande,
+                periode: item.periode,
                 photo:
                     item.image ||
                     "https://picsum.photos/200/300", // Image de test
@@ -84,6 +103,7 @@ export default function Products({ navigation }) {
 
     const handleSortBy = (value) => {
         setSortBy(value);
+        setDefaultSort(value);
         if (value === "name") {
             setSortPressed(true);
         }
@@ -97,7 +117,7 @@ export default function Products({ navigation }) {
         fetchData();
     };
 
-    const buttons = ["Nom", "Catégorie"];
+    const buttons = ["Meilleur vente", "Catégorie"];
 
     const buttonStyles = {
         containerStyle: { height: 40 },
@@ -106,25 +126,29 @@ export default function Products({ navigation }) {
     };
 
     const renderProducts = ({ item }) => (
-        <Pressable onPress={() => handleProductPress(item)}>
-            <View style={stylesList.item}>
-                <Text style={stylesList.title}>{item.designation}</Text>
-                <Image
-                    style={stylesList.imageProduits}
-                    source={{
-                        uri: item.image || "https://picsum.photos/200/300",
-                    }}
-                />
-            </View>
-        </Pressable>
+         <Pressable>
+               <View style={stylesList.item}>
+                   <Text style={stylesList.title}>{item.designation}</Text>
+                   <View style={styles.columnContainer}>
+                   <Text style={styles.columnText}>{`Nombre de commandes : ${item.nbr_commande}`}</Text>
+                   <Text style={styles.columnText}>{`Meilleure période du produit : ${item.periode}`}</Text>
+                   </View>
+                   <Image
+                       style={stylesList.imageProduitsCommande}
+                       source={{
+                           uri: item.image || "https://picsum.photos/200/300",
+                       }}
+                   />
+               </View>
+           </Pressable>
     );
 
     return (
         <View style={styles.containerProduits}>
             <ButtonGroup
                 onPress={(selectedIndex) => {
-                    if (selectedIndex === 0) handleSortBy("name");
-                    else if (selectedIndex === 2) handleFilterBy("chocolat");
+                    if (selectedIndex === 0) handleSortBy("periode");
+                    else if (selectedIndex === 2) handleFilterBy("categorie");
                 }}
                 buttons={buttons}
                 {...buttonStyles}
