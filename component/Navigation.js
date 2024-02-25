@@ -11,6 +11,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign, Entypo } from "@expo/vector-icons";
 import FormProducts from "../screens/FormProducts";
+import Profil from "../screens/Profil";
+import CommandeList from "../screens/CommandeList";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -36,6 +38,7 @@ function FicheProduitNavigator() {
 }
 
 export default function Navigation() {
+
   return (
     <NavigationContainer>
         <Tab.Navigator
@@ -51,6 +54,8 @@ export default function Navigation() {
                         iconName = "add-user";
                     } else if (route.name === "Nos produits") {
                         iconName = "box";
+                    } else if (route.name === "Liste des commandes") {
+                        iconName = "box";
                     }
 
                     return <Entypo name={iconName} size={size} color={color} />;
@@ -65,6 +70,7 @@ export default function Navigation() {
         {/* Barre de navigation du bas de l'écran */}
         <Tab.Screen name="Accueil" component={Home} />
         <Tab.Screen name="Se connecter" component={Log} />
+        <Tab.Screen name="Liste des commandes" component={CommandeList} />
         <Tab.Screen name="Inscription" component={Register} />
         <Tab.Screen name="Nos produits" component={FicheProduitNavigator} />
       </Tab.Navigator>

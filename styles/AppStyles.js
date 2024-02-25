@@ -56,7 +56,7 @@ export const styles = StyleSheet.create({
     fontStyle: "italic",
     fontSize: 20,
     textAlign: "center",
-    bottom: 120,
+    marginTop: 20,
   },
 
   aProposTitre: {
@@ -69,7 +69,7 @@ export const styles = StyleSheet.create({
     fontStyle: "italic",
     fontSize: 17,
     textAlign: "center",
-    bottom: 100,
+    marginTop: 20,
   },
 
   presentationGourmandise: {
@@ -101,6 +101,13 @@ export const styles = StyleSheet.create({
     padding: 8,
   },
   btn_search: {
+    backgroundColor: "sienna", // couleur de fond du bouton
+    padding: 10, // ajout de rembourrage pour un meilleur aspect
+    borderRadius: 5, // coins arrondis
+    alignItems: "center", // alignement du contenu au centre
+    justifyContent: "center", // alignement du contenu au centre
+  },
+  btn_search_active:{
     backgroundColor: "sienna", // couleur de fond du bouton
     padding: 10, // ajout de rembourrage pour un meilleur aspect
     borderRadius: 5, // coins arrondis
@@ -139,6 +146,20 @@ export const styles = StyleSheet.create({
     height: 150,
     marginTop: 100,
   },
+  photoSlide: {
+    width: 300,
+    height: 150,
+    marginTop: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  photoSlideImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'center',
+    maxHeight: 300,
+    marginBottom: 180,
+  },
   texteProduitPhare: {
     textAlign: "center",
     fontSize: 20,
@@ -165,6 +186,26 @@ export const styles = StyleSheet.create({
     flex: 1,
     margin: 10,
   },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalContent: {
+    backgroundColor: "green",
+    padding: 20,
+    borderRadius: 10,
+    elevation: 5,
+  },
+  modalError: {
+    backgroundColor: "red",
+    padding: 20,
+    borderRadius: 10,
+    elevation: 5,
+  },
+  texteModal: {
+    color:"white",
+  },
   item: {
     flex: 1,
     margin: 10,
@@ -187,6 +228,26 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     padding: 10,
+  },
+  topBar: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ccc",
+  },
+
+  logoGourmandiseTopBar: {
+    width: 50,
+    height: 50,
+  },
+
+  positionRechercheTopBar: {
+    flexDirection: "row",
+    alignItems: "center",
+    flex: 1, // Utilisation de flex pour que la zone de recherche s'adapte à l'écran
   },
 });
 
@@ -218,10 +279,28 @@ export const stylesList = StyleSheet.create({
 
   imageProduits: {
     width: "100%",
-    height: 150, // Définissez la taille souhaitée ici
+    height: 150,
     resizeMode: "cover",
-    borderRadius: 8, // Bordure arrondie
+    borderRadius: 8,
   },
+  columnContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 8,
+  },
+  imageProduitsCommande: {
+    width: "100%",
+    height: 75,
+    resizeMode: "cover",
+    borderRadius: 8,
+  },
+
+  columnText: {
+    fontSize: 14,
+    color: 'black',
+  },
+
 });
 
 export const stylesFiche = StyleSheet.create({
