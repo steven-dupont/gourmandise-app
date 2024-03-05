@@ -1,5 +1,5 @@
 // Home.js
-import React, { useState } from "react";
+import React, {useContext, useState} from "react";
 import {
   Text,
   TextInput,
@@ -15,13 +15,14 @@ import { SwiperFlatList } from "react-native-swiper-flatlist";
 import {Icon} from "@ui-kitten/components";
 import resource from "../resources/resource.json";
 import {Entypo} from "@expo/vector-icons";
+import {AuthContext} from "../component/AuthContext";
 
 
 const Stack = createNativeStackNavigator();
 
 export default function Home({ navigation }) {
   const [searchQuery, setSearchQuery] = useState("");
-
+  const {signIn, isLoggedIn} = useContext(AuthContext);
   const handleSearch = () => {
     console.log("Recherche effectuée avec la requête :", searchQuery);
   };
@@ -60,7 +61,7 @@ export default function Home({ navigation }) {
   const handleProductPress = () => {
     navigation.navigate("Nos produits");
   };
-
+console.log("acceuil console log:"+isLoggedIn);
   return (
       <View style={styles.container2}>
         {/* Barre de recherche avec image Gourmandise */}

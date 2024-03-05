@@ -3,7 +3,7 @@ import { Button, ButtonGroup } from "react-native-elements";
 import { FlatList, Pressable, Text, View, Image, RefreshControl } from "react-native";
 import { styles, stylesList } from "../styles/AppStyles";
 
-export default function Products({ navigation }) {
+export default function ProfilUtilisateur({ navigation }) {
     const [sortBy, setSortBy] = useState("name");
     const [filterBy, setFilterBy] = useState("");
     const [data, setData] = useState([]);
@@ -105,39 +105,11 @@ export default function Products({ navigation }) {
         textStyle: { color: "white" },
     };
 
-    const renderProducts = ({ item }) => (
-        <Pressable onPress={() => handleProductPress(item)}>
-            <View style={stylesList.item}>
-                <Text style={stylesList.title}>{item.designation}</Text>
-                <Image
-                    style={stylesList.imageProduits}
-                    source={{
-                        uri: item.image || "https://picsum.photos/200/300",
-                    }}
-                />
-            </View>
-        </Pressable>
-    );
+
 
     return (
         <View style={styles.containerProduits}>
-            <ButtonGroup
-                onPress={(selectedIndex) => {
-                    if (selectedIndex === 0) handleSortBy("name");
-                    else if (selectedIndex === 2) handleFilterBy("chocolat");
-                }}
-                buttons={buttons}
-                {...buttonStyles}
-            />
-            <FlatList
-                data={data}
-                renderItem={renderProducts}
-                keyExtractor={(item, index) => index.toString()}
-                numColumns={2}
-                refreshControl={
-                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-                }
-            />
+
         </View>
     );
 }

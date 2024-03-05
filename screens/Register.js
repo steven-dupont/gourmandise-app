@@ -12,28 +12,32 @@ import { styles } from "../styles/AppStyles";
 export default function Register() {
   const [mail, setMail] = useState("");
   const [motdepasse, setMotdepasse] = useState("");
-  const [confirmmdp, setConfirmMdp] = useState("");
+  // const [confirmmdp, setConfirmMdp] = useState("");
   const [nomPrenom, setNomPrenom] = useState("");
   const [codePostal, setCodePostal] = useState("");
   const [ville, setVille] = useState("");
   const [telephone, setTelephone] = useState("");
+    const [adresse, setAdresse] = useState("test");
+    const [adrLivraison, setadrLivraison] = useState("test");
 
   const handleInscription = async () => {
     try {
       const response = await fetch(
-        "http://94.247.183.122/plesk-site-preview/gourmandise-api.sdupont.v70208.campus-centre.fr/https/94.247.183.122/api/register",
+        "https://gourmandise-api.bdessis.v70208.campus-centre.fr/register",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            email: mail,
             nom: nomPrenom,
             ville: ville,
-            codePostal: codePostal,
+            cp: codePostal,
             telephone: telephone,
             motdepasse: motdepasse,
+            adresse: adresse,
+            email: mail,
+            adrLivraison: adrLivraison
           }),
         },
       );
@@ -104,11 +108,19 @@ export default function Register() {
             secureTextEntry={true}
           />
 
-          <Text style={styles.label}>Confirmer votre mot de passe</Text>
+          <Text style={styles.label}>Confirmer votre adresse </Text>
+          <TextInput
+              style={styles.input}
+              placeholder="Confirmer adresse"
+              onChangeText={(val) => setAdresse(val)}
+              secureTextEntry={true}
+          />
+
+          <Text style={styles.label}>Confirmer votre adresse de livraison</Text>
           <TextInput
             style={styles.input}
-            placeholder="Confirmez votre mot de passe"
-            onChangeText={(val) => setConfirmMdp(val)}
+            placeholder="Confirmer adresse de livraison"
+            onChangeText={(val) => setadrLivraison(val)}
             secureTextEntry={true}
           />
 
