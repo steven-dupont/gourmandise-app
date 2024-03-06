@@ -22,12 +22,18 @@ export default function App() {
 
     const RetrieveToken = async () => {
         try {
+            // le token est conserve au demarrage
+            // ordre de base
+            // const storedToken = await SecureStore.getItemAsync("token");
+            // delete le token au demarrage de lappli le temps de setup la deco
+            await SecureStore.deleteItemAsync("token");
+            // le token est conserve au demarrage
             const storedToken = await SecureStore.getItemAsync("token");
-            console.log("app.js storage token:"+storedToken);
+            // console.log("app.js storage token:"+storedToken);
             if (storedToken) {
                 // Envoi de la requête à l'API pour vérifier le token
                 const response = await fetch(
-                    "ttps://gourmandise-api.bdessis.v70208.campus-centre.fr/verify-token",
+                    "https://gourmandise-api.bdessis.v70208.campus-centre.fr/verify-token",
                     {
                         method: "POST",
                         headers: {
@@ -73,6 +79,7 @@ export default function App() {
             try {
                 //Chargement des fonts
                 await Font.loadAsync({Inter_400Regular, Inter_600SemiBold});
+                await RetrieveToken();
             } catch (e) {
                 console.warn(e);
             } finally {

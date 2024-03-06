@@ -60,6 +60,7 @@ export default function Navigation() {
     return (
         <NavigationContainer>
             <Tab.Navigator
+                initialRouteName="Accueil"
                 screenOptions={({route}) => ({
                     tabBarIcon: ({color, size}) => {
                         let iconName;

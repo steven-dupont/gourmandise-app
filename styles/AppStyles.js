@@ -136,10 +136,9 @@ export const styles = StyleSheet.create({
     height: 200,
   },
   photo1: {
-    // width: 300,
-    height: 150,
-    marginTop: 100,
-    maxWidth: 300,
+    width: '10%',
+    height: '10%',
+    resizeMode: 'cover', // ou 'contain' selon le comportement désiré
   },
   photo2: {
     width: 300,
@@ -397,4 +396,17 @@ export const stylesFiche = StyleSheet.create({
   footerControl: {
     marginHorizontal: 2,
   },
+  cardAcceuil: {
+    flex: 1,
+    margin: 5,
+    padding: 10,
+    backgroundColor: "#f0f0f0",
+    elevation: 5, // Pour Android
+    shadowColor: "sienna", // Pour iOS
+    shadowOffset: { width: 5, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    borderRadius: 8, // Bordure arrondie
+    alignItems: "stretch"
+  }
 });

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, ButtonGroup } from "react-native-elements";
 import { FlatList, Pressable, Text, View, Image, RefreshControl } from "react-native";
 import { styles, stylesList } from "../styles/AppStyles";
-
+import Home from "../screens/Home";
 export default function Products({ navigation }) {
     const [sortBy, setSortBy] = useState("name");
     const [filterBy, setFilterBy] = useState("");
@@ -81,6 +81,11 @@ export default function Products({ navigation }) {
             },
         });
     };
+    const handleGoToHome = () => {
+        navigation.navigate("Accueil", {
+            productDetails: productDetails // Passer les données du produit à l'acceuil
+        });
+    };
 
     const handleSortBy = (value) => {
         setSortBy(value);
@@ -121,6 +126,7 @@ export default function Products({ navigation }) {
 
     return (
         <View style={styles.containerProduits}>
+            {/*<Home products={data} />*/}
             <ButtonGroup
                 onPress={(selectedIndex) => {
                     if (selectedIndex === 0) handleSortBy("name");
